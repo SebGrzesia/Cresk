@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cresk.Data;
 using Cresk.Models;
+using Cresk.ViewModels;
 
 namespace Cresk.Controllers
 {
@@ -59,8 +60,16 @@ namespace Cresk.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Email,Status,Priority,CreatedDate,ModifyData")] DbTicket dbTicket)
+        public async Task<IActionResult> Create(CreateDbTicketViewModel vm)
         {
+
+
+            DbTicket dbTicket = new DbTicket();
+
+            dbTicket.Title = vm.Title;
+            dbTicket.Description = vm.Description;
+            dbTicket.Priority = vm.Priority;
+            dbTicket.Email = vm.Email;
             dbTicket.CreatedDate = DateTime.Now;
             dbTicket.ModifyData = DateTime.Now;
             dbTicket.Status = TicketStatus.New;           
@@ -89,7 +98,13 @@ namespace Cresk.Controllers
             {
                 return NotFound();
             }
-            return View(dbTicket);
+
+            EditDbTicketViewModel vm = new EditDbTicketViewModel();
+            vm.Title = dbTicket.Title;
+            vm.Status = dbTicket.Status;
+            vm.Email = dbTicket.Email;
+            vm.Description = dbTicket.Description;
+            return View(vm);
         }
 
         // POST: DbTicket/Edit/5
@@ -97,35 +112,22 @@ namespace Cresk.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Title,Description,Email,Status,Priority,CreatedDate,ModifyData")] DbTicket dbTicket)
+        public async Task<IActionResult> Edit(EditDbTicketViewModel vm)
         {
-            if (id != dbTicket.Id)
+            var dbTicket = await _context.DbTicket.FindAsync(vm.Id);
+            if(dbTicket == null)
             {
-                return NotFound();
+                return View(vm);
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    dbTicket.ModifyData = DateTime.Now;
-                    _context.Update(dbTicket);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DbTicketExists(dbTicket.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(dbTicket);
+            dbTicket.Status = vm.Status;
+            dbTicket.Title = vm.Title;
+            dbTicket.Email = vm.Email;
+            dbTicket.Description = vm.Description;
+            dbTicket.ModifyData = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: DbTicket/Delete/5
