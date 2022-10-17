@@ -1,4 +1,4 @@
-﻿using Cresk.Models;
+﻿using Cresk.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace Cresk.ViewModels

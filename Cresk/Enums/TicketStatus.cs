@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
-namespace Cresk.Models
+namespace Cresk.Enums
 {
     public enum TicketStatus
     {
         New,
-        [Description("In progress")]
+        [Display(Name ="In progress")]
         InProgress,
-        [Description("Waiting reply")]
+        [Display(Name ="Waiting reply")]
         WaitingReply,
         Replied,
         Resolved

@@ -1,4 +1,4 @@
-﻿namespace Cresk.Models
+﻿namespace Cresk.Enums
 {
     public enum TicketPriority
     {

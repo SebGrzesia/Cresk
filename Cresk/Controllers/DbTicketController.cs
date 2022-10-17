@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Cresk.Data;
 using Cresk.Models;
 using Cresk.ViewModels;
+using Cresk.Enums;
 
 namespace Cresk.Controllers
 {
