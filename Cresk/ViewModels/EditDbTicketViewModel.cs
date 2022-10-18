@@ -14,6 +14,6 @@ namespace Cresk.ViewModels
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail jest nieprawidłowy")]
         public string Email { get; set; }
         public TicketStatus Status { get; set; }
-        //public TicketPriority Priority { get; set; }
+        public TicketPriority Priority { get; set; }
     }
 }

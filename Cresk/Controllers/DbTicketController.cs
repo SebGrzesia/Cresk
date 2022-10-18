@@ -103,6 +103,7 @@ namespace Cresk.Controllers
             EditDbTicketViewModel vm = new EditDbTicketViewModel();
             vm.Title = dbTicket.Title;
             vm.Status = dbTicket.Status;
+            vm.Priority = dbTicket.Priority;
             vm.Email = dbTicket.Email;
             vm.Description = dbTicket.Description;
             return View(vm);
@@ -122,6 +123,7 @@ namespace Cresk.Controllers
             }
 
             dbTicket.Status = vm.Status;
+            dbTicket.Priority = vm.Priority;
             dbTicket.Title = vm.Title;
             dbTicket.Email = vm.Email;
             dbTicket.Description = vm.Description;
