@@ -25,6 +25,7 @@ namespace Cresk.Controllers
         public async Task<IActionResult> Index(string searchString)
         {
             var ticket = from m in _context.DbTicket select m;
+            
             if (!String.IsNullOrEmpty(searchString))
             {
                 ticket = ticket.Where(s => s.Title!.Contains(searchString));
@@ -39,6 +40,7 @@ namespace Cresk.Controllers
             {
                 return NotFound();
             }
+
 
             var dbTicket = await _context.DbTicket
                 .FirstOrDefaultAsync(m => m.Id == id);
