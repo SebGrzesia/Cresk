@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cresk.Models.DbTicket>
+﻿@model IEnumerable<Cresk.ViewModels.IndexDbTicketViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -27,16 +27,16 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.EmailAddress)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.TicketStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Priority)
+                @Html.DisplayNameFor(model => model.TicketPriority)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ModifyData)
+                @Html.DisplayNameFor(model => model.ModifyDate)
             </th>
         </tr>
     </thead>
@@ -50,16 +50,29 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.EmailAddress)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.TicketStatus)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Priority)
+                @Html.DisplayFor(modelItem => item.TicketPriority)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ModifyData)
+                    @{
+                        if(item.ModifyDate >= DateTime.Today)
+                        {
+                            //@Html.DisplayFor(modelItem => item.ModifyData.ToString("H:mm"))
+                            @Html.Raw(item.ModifyDate.ToString("H:mm"))
+
+                        }
+                        else
+                        {
+                            //@Html.DisplayFor(modelItem => item.ModifyData.ToString("MMMM dd, yyyy"))
+                            @Html.Raw(item.ModifyDate.ToString("MMMM dd, yyyy"))
+                        }
+                    }
+                
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
