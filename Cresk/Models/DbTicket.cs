@@ -11,6 +11,7 @@ namespace Cresk.Models
         [Display(Name = "Id zgłoszenia")]
         [Key]
         public string Id { get; set; }
+
         [Display(Name = "Tytuł zgłoszenia")]
         public string Title { get; set; }
         public string? DbTagId { get; set; }
@@ -26,7 +27,7 @@ namespace Cresk.Models
         [Display(Name = "Data stworzenia")]
         public DateTime CreatedDate { get; set; }
         [Display(Name = "Data modyfikacji")]
-        public DateTime? ModifyData { get; set; }
+        public DateTime ModifyData { get; set; }
 
         public DbTicket()
         {

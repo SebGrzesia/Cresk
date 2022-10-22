@@ -24,13 +24,27 @@ namespace Cresk.Controllers
         // GET: DbTicket
         public async Task<IActionResult> Index(string searchString)
         {
-            var ticket = from m in _context.DbTicket select m;
+            var ticket = _context.DbTicket.AsQueryable();
             
             if (!String.IsNullOrEmpty(searchString))
             {
                 ticket = ticket.Where(s => s.Title!.Contains(searchString));
             }
-            return View(await ticket.ToListAsync());
+
+            var ticketsFromDatabase = await ticket.ToListAsync();
+
+            var ticketListViewModel = ticketsFromDatabase.Select(ticketFromDatabase => new IndexDbTicketViewModel()
+            {
+                Description = ticketFromDatabase.Description,
+                ModifyDate = ticketFromDatabase.ModifyData,
+                EmailAddress = ticketFromDatabase.Email,
+                TicketPriority = ticketFromDatabase.Priority,
+                TicketStatus = ticketFromDatabase.Status,
+                Id = ticketFromDatabase.Id,
+                Title = ticketFromDatabase.Title
+            });
+
+            return View(ticketListViewModel);
         }
 
         // GET: DbTicket/Details/5
