@@ -9,9 +9,10 @@ namespace Cresk.Models
     public class DbTicket
     {
         [Display(Name = "Id zgłoszenia")]
-        [Key]
+        [Key] 
         public string Id { get; set; }
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int TicketDisplayNumber { get; set; }
         [Display(Name = "Tytuł zgłoszenia")]
         public string Title { get; set; }
         public string? DbTagId { get; set; }

@@ -21,6 +21,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.TicketDisplayNumber)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
@@ -44,6 +47,9 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.TicketDisplayNumber)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
@@ -59,19 +65,19 @@
                 @Html.DisplayFor(modelItem => item.TicketPriority)
             </td>
             <td>
-                    @{
-                        if(item.ModifyDate >= DateTime.Today)
-                        {
-                            //@Html.DisplayFor(modelItem => item.ModifyData.ToString("H:mm"))
-                            @Html.Raw(item.ModifyDate.ToString("H:mm"))
+            @{
+                if(item.ModifyDate >= DateTime.Today)
+                {
+                    //@Html.DisplayFor(modelItem => item.ModifyData.ToString("H:mm"))
+                    @Html.Raw(item.ModifyDate.ToString("H:mm"))
 
-                        }
-                        else
-                        {
-                            //@Html.DisplayFor(modelItem => item.ModifyData.ToString("MMMM dd, yyyy"))
-                            @Html.Raw(item.ModifyDate.ToString("MMMM dd, yyyy"))
-                        }
-                    }
+                }
+                else
+                {
+                    //@Html.DisplayFor(modelItem => item.ModifyData.ToString("MMMM dd, yyyy"))
+                    @Html.Raw(item.ModifyDate.ToString("MMMM dd, yyyy"))
+                }
+            }
                 
             </td>
             <td>

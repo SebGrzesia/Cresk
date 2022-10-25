@@ -1,11 +1,14 @@
 ﻿using Cresk.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cresk.ViewModels
 {
     public class IndexDbTicketViewModel
     {
         public string Id { get; set; }
+        [Display(Name = "ID")]
+        public int TicketDisplayNumber { get; set; }
         [Display(Name = "Title")]
         public string Title { get; set; }
         [Display(Name = "Description")]

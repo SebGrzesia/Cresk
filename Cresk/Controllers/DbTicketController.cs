@@ -41,7 +41,8 @@ namespace Cresk.Controllers
                 TicketPriority = ticketFromDatabase.Priority,
                 TicketStatus = ticketFromDatabase.Status,
                 Id = ticketFromDatabase.Id,
-                Title = ticketFromDatabase.Title
+                Title = ticketFromDatabase.Title,
+                TicketDisplayNumber = ticketFromDatabase.TicketDisplayNumber
             });
 
             return View(ticketListViewModel);
@@ -82,7 +83,6 @@ namespace Cresk.Controllers
 
 
             DbTicket dbTicket = new DbTicket();
-
             dbTicket.Title = vm.Title;
             dbTicket.Description = vm.Description;
             dbTicket.Priority = vm.Priority;

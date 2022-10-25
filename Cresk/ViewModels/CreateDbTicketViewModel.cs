@@ -1,5 +1,6 @@
 ﻿using Cresk.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cresk.ViewModels
 {
@@ -7,7 +8,7 @@ namespace Cresk.ViewModels
     {
         [Display(Name = "Tytuł zgłoszenia")]
         public string Title { get; set; }
-        [Display(Name = "Opis zgłoszenia")]
+        [Display(Name = "Display")]
         public string Description { get; set; }
         [Display(Name = "Adres email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail jest nieprawidłowy")]
