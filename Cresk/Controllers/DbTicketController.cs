@@ -22,14 +22,27 @@ namespace Cresk.Controllers
         }
 
         // GET: DbTicket
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string searchString, string dbTicketStatus)
         {
+            //Use Linq to get list of genere
+            IQueryable<string> StatusQuery = from m in _context.DbTicket orderby m.Status select m.Status.ToString();
+
             var ticket = _context.DbTicket.AsQueryable();
             
             if (!String.IsNullOrEmpty(searchString))
             {
                 ticket = ticket.Where(s => s.Title!.Contains(searchString));
             }
+
+            if (!string.IsNullOrEmpty(dbTicketStatus))
+            {
+                ticket = ticket.Where(x => x.Status.ToString() == dbTicketStatus);
+            }
+            var dbTicketStatusVM = new TicketStatusViewModel
+            {
+                Status = new SelectList(await StatusQuery.Distinct().ToListAsync()),
+                DbTickets = await ticket.ToListAsync()
+            };
 
             var ticketsFromDatabase = await ticket.ToListAsync();
 
