@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Cresk.ViewModels.IndexDbTicketViewModel>
+﻿@using Cresk.Enums
+@model Cresk.ViewModels.TicketStatusViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,9 +13,11 @@
 
 <form asp-controller="DbTicket" asp-action="Index" method="get">
     <p>
+        <select asp-for="TicketStatus" class="form-control" asp-items="Html.GetEnumSelectList<TicketStatus>()">
+                <option value="">All</option>
+        </select>
 
-
-        Search: <input type="text" name="SearchString" />
+        Search: <input type="text" name="SearchString" value="@Html.ValueFor(model => model.SearchString)"/>
         <input type="submit" value="Wyszukaj" />
     </p>
 </form>
@@ -23,30 +26,27 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TicketDisplayNumber)
+                @Html.DisplayNameFor(model => model.IndexDbTicketViewModels[0].TicketDisplayNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.IndexDbTicketViewModels[0].Title)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
+@*            <th>
                 @Html.DisplayNameFor(model => model.EmailAddress)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.IndexDbTicketViewModels[0].TicketStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TicketStatus)
+                @Html.DisplayNameFor(model => model.IndexDbTicketViewModels[0].TicketPriority)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TicketPriority)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModifyDate)
+                @Html.DisplayNameFor(model => model.IndexDbTicketViewModels[0].ModifyDate)
             </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.IndexDbTicketViewModels) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.TicketDisplayNumber)
@@ -54,12 +54,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
+@*            <td>
                 @Html.DisplayFor(modelItem => item.EmailAddress)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.TicketStatus)
             </td>
@@ -84,7 +81,6 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

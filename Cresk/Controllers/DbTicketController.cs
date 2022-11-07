@@ -22,28 +22,20 @@ namespace Cresk.Controllers
         }
 
         // GET: DbTicket
-        public async Task<IActionResult> Index(string searchString, string dbTicketStatus)
+        public async Task<IActionResult> Index(string searchString, TicketStatus? ticketStatus)
         {
-            //Use Linq to get list of genere
-            IQueryable<string> StatusQuery = from m in _context.DbTicket orderby m.Status select m.Status.ToString();
-
             var ticket = _context.DbTicket.AsQueryable();
             
             if (!String.IsNullOrEmpty(searchString))
             {
-                ticket = ticket.Where(s => s.Title!.Contains(searchString));
+                ticket = ticket.Where(s => s.Title.Contains(searchString));
             }
 
-            if (!string.IsNullOrEmpty(dbTicketStatus))
+            if (ticketStatus.HasValue)
             {
-                ticket = ticket.Where(x => x.Status.ToString() == dbTicketStatus);
+                ticket = ticket.Where(t => t.Status == ticketStatus);
             }
-            var dbTicketStatusVM = new TicketStatusViewModel
-            {
-                Status = new SelectList(await StatusQuery.Distinct().ToListAsync()),
-                DbTickets = await ticket.ToListAsync()
-            };
-
+            ticket = ticket.OrderByDescending(t => t.CreatedDate);
             var ticketsFromDatabase = await ticket.ToListAsync();
 
             var ticketListViewModel = ticketsFromDatabase.Select(ticketFromDatabase => new IndexDbTicketViewModel()
@@ -58,26 +50,12 @@ namespace Cresk.Controllers
                 TicketDisplayNumber = ticketFromDatabase.TicketDisplayNumber
             });
 
-            return View(ticketListViewModel);
-        }
+            var indexViewModel = new TicketStatusViewModel();
+            indexViewModel.IndexDbTicketViewModels = ticketListViewModel.ToList();
+            indexViewModel.SearchString = searchString;
+            indexViewModel.TicketStatus = ticketStatus;
 
-        // GET: DbTicket/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.DbTicket == null)
-            {
-                return NotFound();
-            }
-
-
-            var dbTicket = await _context.DbTicket
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (dbTicket == null)
-            {
-                return NotFound();
-            }
-
-            return View(dbTicket);
+            return View(indexViewModel);
         }
 
         // GET: DbTicket/Create
@@ -135,6 +113,8 @@ namespace Cresk.Controllers
             vm.Priority = dbTicket.Priority;
             vm.Email = dbTicket.Email;
             vm.Description = dbTicket.Description;
+            vm.CreateDate = dbTicket.CreatedDate;
+            vm.ModifyDate = dbTicket.ModifyData;
             return View(vm);
         }
 
