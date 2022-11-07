@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Cresk</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/sidebarNavbar.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Cresk.styles.css" asp-append-version="true" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
+
+@*    <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Cresk</a>
@@ -35,7 +37,39 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header>*@
+
+    <input type="checkbox" id="check" />
+    <label for="check">
+        <i class="fa fa-bars" id="okButton"></i>
+        <i class="fa fa-times" id="cancelButton"></i>
+    </label>
+
+    <div class="sideBar">
+        <ul>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-hand">Welcome</i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-ticket">Ticket</i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-tag">Tag</i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-lock">Privacy</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
