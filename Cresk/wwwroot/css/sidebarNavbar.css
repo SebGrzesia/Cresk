@@ -1,13 +1,9 @@
-﻿html{
-    height:100%;
-}
-
-body{
-    overflow-x:hidden;
-    font-family:'Times New Roman', Times, serif;
-    font-size:16px;
-    margin:0;
-    padding:0;
+﻿body {
+    overflow-x: hidden;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
 }
 
 img{
@@ -15,10 +11,10 @@ img{
 }
 
 
-#viewport {
+#page-container {
+    position: relative;
     min-height: 100%;
-    display: flex;
-    flex-direction: column;
+    min-width: 100%;
     padding-left: 250px;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -28,7 +24,7 @@ img{
 
 #content {
     width: 100%;
-    margin-right: 0;
+    padding-bottom:2.5rem;
 }
 
 #sidebar {
@@ -51,38 +47,29 @@ img{
     font-size: 20px;
     line-height: 52px;
     text-align: center;
+    user-select:none;
 }
 
 #sidebar header a {
     color: #fff;
-    text-decoration: none;
 }
 
-#sidebar header a:hover {
-    color: #fff;
-}
-
-#sidebar .nav a {
-    background: none;
-    border-bottom: 1px solid #455A64;
-    color: #CFD8DC;
-    font-size: 14px;
-    padding: 16px 24px;
-}
-
-#sidebar .nav a:hover {
-    background: none;
-    color: #ECEFF1;
-}
-
-#sidebar .nav a i {
-    margin-right: 16px;
+#sidebar ul a {
+    display:block;
+    height:100%;
+    width:100%;
+    line-height: 68px;
+    font-size:20px;
+    padding-left:42px;
+    box-sizing:border-box;
+    border-top:1px solid black;
+    border-bottom: 1px solid black;
+    color:antiquewhite;
+    transition:.5s;
 }
 
 .footer {
+    bottom: 0;
     width: 100%;
-    bottom:0;
     background-color: whitesmoke;
-    position:sticky;
-    top:100%;
 }
