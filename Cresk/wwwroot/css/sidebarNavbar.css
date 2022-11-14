@@ -1,17 +1,114 @@
-﻿body {
-    overflow-x: hidden;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 16px;
+﻿* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    list-style:none;
+    text-decoration:none;
+    box-sizing:border-box;
     margin: 0;
     padding: 0;
 }
-
-img{
-    width:60%;
+img {
+    height:65px;
 }
 
+body {
+    background-image: url('../img/spikes.png');
+}
 
-#page-container {
+.wrapper {
+    margin:10px;
+}
+
+.wrapper .top_navbar {
+    width: 100%;
+    display: flex;
+
+}
+
+.wrapper .top_navbar .hamburger {
+    width: 70px;
+    height: 81px;
+    background: #37474F;
+    padding: 15px 17px;
+    border-top-left-radius: 20px;
+    cursor: pointer;
+}
+
+.wrapper .top_navbar .hamburger div{
+    width: 35px;
+    height: 4px;
+    background: #ffffff;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.wrapper .top_navbar .navbar {
+    width: calc(100% - 70px);
+    background: #ffffff;
+    border-top-right-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.wrapper .top_navbar .navbar .logo {
+
+}
+
+.wrapper .top_navbar .navbar ul{
+    display: flex;
+    margin:0;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+}
+
+.wrapper .top_navbar .navbar ul li {
+    margin: 0 10px;
+}
+
+.wrapper .top_navbar .navbar ul li a {
+    font-size:24px;
+    color: darkred;
+}
+
+.wrapper .sidebar {
+    position: fixed;
+    left: 10px;
+    background: #37474F;
+    width: 200px;
+    height:calc(100% - 101px);
+    border-bottom-left-radius:20px;
+    transition: all 0.3s ease;
+}
+
+.wrapper .sidebar ul li a{
+    display:block;
+    padding: 20px;
+    color: #d3d3d3;
+    position:relative;
+    margin-bottom: 1px;
+}
+
+.wrapper .container-fluid{
+    width:calc(100% - 200px);
+    margin-left:200px;
+    padding:15px;
+    transition: all 0.3s ease;
+}
+
+/*.wrapper .sidebar ul li a:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    color: #d3d3d3;
+}*/
+
+
+/*#page-container {
     position: relative;
     min-height: 100%;
     min-width: 100%;
@@ -72,4 +169,4 @@ img{
     bottom: 0;
     width: 100%;
     background-color: whitesmoke;
-}
+}*/
