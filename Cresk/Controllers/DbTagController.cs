@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cresk.Data;
 using Cresk.Models;
+using Cresk.ViewModels;
+using System.Net.Sockets;
 
 namespace Cresk.Controllers
 {
@@ -22,12 +24,19 @@ namespace Cresk.Controllers
         // GET: DbTag
         public async Task<IActionResult> Index(string searchString)
         {
-            var tag = from m in _context.DbTag select m;
+            var tag = _context.DbTag.AsQueryable();
             if (!String.IsNullOrEmpty(searchString))
             {
-                tag = tag.Where(t => t.Name!.Contains(searchString));
+                tag = tag.Where(t => t.Name.Contains(searchString));
             }
-            return View(await tag.ToArrayAsync());
+            var tagFromDatabase = await tag.ToListAsync();
+            var tagsListViewModel = tagFromDatabase.Select(tagFromDatabase => new IndexDbTagViewModel()
+            {
+                Name = tagFromDatabase.Name,
+                Desctiption = tagFromDatabase.Description
+            });
+            var indexViewModel = new 
+            return View(tagsListViewModel);
         }
 
         // GET: DbTag/Details/5
