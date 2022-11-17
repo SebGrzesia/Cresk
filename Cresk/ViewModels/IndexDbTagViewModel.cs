@@ -9,6 +9,6 @@ namespace Cresk.ViewModels
         [Display(Name = "Title")]
         public string Name { get; set; }
         [Display(Name= "Description")]
-        public string Desctiption { get; set; }
+        public string Description { get; set; }
     }
 }

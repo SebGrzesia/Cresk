@@ -27,15 +27,15 @@ namespace Cresk.Controllers
             var tag = _context.DbTag.AsQueryable();
             if (!String.IsNullOrEmpty(searchString))
             {
-                tag = tag.Where(t => t.Name.Contains(searchString));
+                tag = tag.Where(t => t.Name!.Contains(searchString));
             }
             var tagFromDatabase = await tag.ToListAsync();
             var tagsListViewModel = tagFromDatabase.Select(tagFromDatabase => new IndexDbTagViewModel()
             {
                 Name = tagFromDatabase.Name,
-                Desctiption = tagFromDatabase.Description
+                Description = tagFromDatabase.Description
             });
-            var indexViewModel = new 
+
             return View(tagsListViewModel);
         }
 
