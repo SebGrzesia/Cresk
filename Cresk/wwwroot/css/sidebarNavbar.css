@@ -1,0 +1,131 @@
+﻿* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    list-style:none;
+    text-decoration:none;
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration:none;
+}
+
+img {
+    height:65px;
+}
+
+body {
+    background-image: url('../img/spikes.png');
+}
+
+.main-container {
+    width: calc(100vw - 20px);
+    height: calc(100vh - 20px);
+    display: flex;
+    flex-direction:column;
+    margin:10px;
+}
+
+.main-container .top_navbar {
+    height: 60px;
+    background-color: #e5e5e5;
+    border-radius: 20px 20px 0 0;
+    display:flex;
+    align-items:center;
+}
+
+.main-container .top_navbar .hamburger {
+    min-width: 70px;
+    height: 100%;
+    font-size: 24px;
+    color: #dddddd;
+    background: #263238;
+    border-radius: 20px 0px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.main-container .top_navbar .logo{
+    margin-left:10px;
+}
+
+.main-container .top_navbar .user-area{
+    width:100%;
+    display:flex;
+    justify-content:end;
+    align-items:center;
+    margin:0;
+    margin-right:20px;
+}
+
+.main-container .page-area{
+    display:flex;
+    height:calc(100vh - 80px);
+    width:100%;
+}
+
+.main-container .page-area .sidebar {
+    min-width: 200px;
+    transition: all ease-in-out .1s;
+    background-color: #263238;
+    border-bottom-left-radius: 20px;
+}
+
+.main-container .page-area .main-content{
+    overflow-y:scroll;
+    width:100%;
+    padding: 20px;
+}
+
+.main-container .main-footer{
+    height:20px;
+    text-align:center;
+}
+
+.main-container .page-area .navigation-link{
+    display:flex;
+    align-items:center;
+    padding:10px;
+    font-size:20px;
+    color:#c1c0c0;
+}
+
+.main-container .page-area .navigation-link:before {
+    color: #c1c0c0;
+}
+
+.main-container .page-area .navigation-link :first-child {
+    margin-right: 10px;
+}
+
+.main-container .page-area .navigation-list{
+    padding:0;
+}
+
+.main-container .page-area .navigation-list .navigation-link:hover {
+    background: #37474F;
+    padding-left:20px;
+}
+
+.main-container .page-area .sidebar.minimalize {
+    min-width: 70px;
+    background-color: #263238;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius:20px;
+}
+
+.main-container .page-area .sidebar.minimalize .navigation-link {
+    align-items:center;
+    justify-content:center;
+}
+
+.main-container .page-area .sidebar.minimalize .navigation-link :first-child {
+    margin-right: 0px;
+}
+
+.hide {
+    display: none;
+}
