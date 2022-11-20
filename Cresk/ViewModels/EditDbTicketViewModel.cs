@@ -10,8 +10,8 @@ namespace Cresk.ViewModels
         public string Title { get; set; }
         [Display(Name = "Description")]
         public string Description { get; set; }
-        [Display(Name = "E-mail adress")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Invalid e-mail adress")]
+        [Display(Name = "Email address")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Email is invalid")]
         public string Email { get; set; }
         public TicketStatus Status { get; set; }
         public TicketPriority Priority { get; set; }
