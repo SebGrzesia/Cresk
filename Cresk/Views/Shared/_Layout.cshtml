@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - Cresk</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/sidebarNavbar.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Cresk.styles.css" asp-append-version="true" />
+@*    <link rel="stylesheet" href="~/Cresk.styles.css" asp-append-version="true" />*@
     <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
@@ -28,25 +28,35 @@
                     <li>
                         <a class="navigation-link" asp-area="" asp-controller="Home" asp-action="Index">
                             <i class="fa-solid fa-hand" aria-hidden="true"></i>
-                            <span>
+                            <span class="navigation-link-text">
                                 Home
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a class="fa-solid fa-ticket" aria-hidden="true" asp-area="" asp-controller="DbTicket" asp-action="Index">Tickets</a>
+                        <a class="navigation-link"  asp-area="" asp-controller="DbTicket" asp-action="Index">
+                            <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+                            <span class="navigation-link-text">
+                                Tickets
+                            </span>
+                        </a>
                     </li>
                     <li>
-                        <a class="fa-solid fa-tag" aria-hidden="true" asp-area="" asp-controller="DbTag" asp-action="Index">Tags</a>
+                        <a class="navigation-link" asp-area="" asp-controller="DbTag" asp-action="Index">
+                            <i class="fa-solid fa-tag" aria-hidden="true"></i>
+                            <span class="navigation-link-text">
+                                Tags
+                            </span>
+                        </a>
                     </li>
                     <li>
-
-                        <a class="fa-solid fa-lock" aria-hidden="true" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        @*                <a class="fa-solid fa-lock" aria-hidden="true"></a>*@
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
+                        <a class="navigation-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                            <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                            <span class="navigation-link-text">
+                                Privacy
+                            </span>
+                        </a>
+                    </li>          
                 </ul>
             </div>
             <div class="main-content">
@@ -54,12 +64,41 @@
                     @RenderBody()
                 </main>
             </div>
-        </div>
+@*        </div>
+        <footer>
+            &copy; 2022 - Cresk - <a asp asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </footer>*@
     </div>
-
+     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+    $(document).ready(function() {
+        $(".hamburger").click(function() {
+            $(".sidebar").toggleClass("minimalize");
+            if ($(".sidebar").hasClass("minimalize")) {
+                localStorage.setItem("sidebarHidden", true)
+            }
+            else {
+                localStorage.setItem("sidebarHidden", false)
+            }
+            const links = document.querySelectorAll('.navigation-link-text');
+                links.forEach(link => {
+                link.classList.toggle('hide');
+            });
+        });
+    });
+    const sidebarHidden = localStorage.getItem("sidebarHidden");
+    if (sidebarHidden === "true") {
+        $(".sidebar").toggleClass("minimalize");
+        const links = document.querySelectorAll('.navigation-link-text');
+            links.forEach(link => {
+            link.classList.toggle('hide');
+        });
+    }
+    </script>
 </body>
 </html>
