@@ -6,12 +6,12 @@ namespace Cresk.ViewModels
 {
     public class CreateDbTicketViewModel
     {
-        [Display(Name = "Tytuł zgłoszenia")]
+        [Display(Name = "Title")]
         public string Title { get; set; }
-        [Display(Name = "Display")]
+        [Display(Name = "Description")]
         public string Description { get; set; }
-        [Display(Name = "Adres email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail jest nieprawidłowy")]
+        [Display(Name = "Email address")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Email is invalid")]
         public string Email { get; set; }
         public TicketPriority Priority { get; set; }
     }

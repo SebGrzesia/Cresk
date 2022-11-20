@@ -5,51 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Cresk</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Cresk.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/sidebarNavbar.css" asp-append-version="true" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Cresk</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DbTicket" asp-action="Index">Tickets</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DbTag" asp-action="Index">Tags</a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="main-container">
+        <div class="top_navbar">
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - Cresk - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="logo">
+                <img src="~/img/name_1.png"/>
+            </div>
+            <ul class="user-area">
+                <li><a href=""><i class="fas fa-user"></i></a></li>
+            </ul>
         </div>
-    </footer>
+        <div class="page-area">
+            <div class="sidebar">
+                <ul class="navigation-list">
+                    <li>
+                        <a class="navigation-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="fa-solid fa-hand" aria-hidden="true"></i>
+                            <span class="navigation-link-text">
+                                Home
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="navigation-link"  asp-area="" asp-controller="DbTicket" asp-action="Index">
+                            <i class="fa-solid fa-ticket" aria-hidden="true"></i>
+                            <span class="navigation-link-text">
+                                Tickets
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="navigation-link" asp-area="" asp-controller="DbTag" asp-action="Index">
+                            <i class="fa-solid fa-tag" aria-hidden="true"></i>
+                            <span class="navigation-link-text">
+                                Tags
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="navigation-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                            <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                            <span class="navigation-link-text">
+                                Privacy
+                            </span>
+                        </a>
+                    </li>          
+                </ul>
+            </div>
+            <div class="main-content">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+@*        </div>
+        <footer>
+            &copy; 2022 - Cresk - <a asp asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </footer>*@
+    </div>
+     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+    $(document).ready(function() {
+        $(".hamburger").click(function() {
+            $(".sidebar").toggleClass("minimalize");
+            if ($(".sidebar").hasClass("minimalize")) {
+                localStorage.setItem("sidebarHidden", true)
+            }
+            else {
+                localStorage.setItem("sidebarHidden", false)
+            }
+            const links = document.querySelectorAll('.navigation-link-text');
+                links.forEach(link => {
+                link.classList.toggle('hide');
+            });
+        });
+    });
+    const sidebarHidden = localStorage.getItem("sidebarHidden");
+    if (sidebarHidden === "true") {
+        $(".sidebar").toggleClass("minimalize");
+        const links = document.querySelectorAll('.navigation-link-text');
+            links.forEach(link => {
+            link.classList.toggle('hide');
+        });
+    }
+    </script>
 </body>
 </html>
