@@ -22,7 +22,7 @@ namespace Cresk.Controllers
         }
 
         // GET: DbTicket
-        public async Task<IActionResult> Index(string searchString, TicketStatus? ticketStatus)
+        public async Task<IActionResult> Index(string searchString, TicketStatus? ticketStatus, TicketPriority? ticketPriority)
         {
             var ticket = _context.DbTicket.AsQueryable();
             
@@ -34,6 +34,11 @@ namespace Cresk.Controllers
             if (ticketStatus.HasValue)
             {
                 ticket = ticket.Where(t => t.Status == ticketStatus);
+            }
+
+            if (ticketPriority.HasValue)
+            {
+                ticket = ticket.Where(j => j.Priority == ticketPriority);
             }
             ticket = ticket.OrderByDescending(t => t.CreatedDate);
             var ticketsFromDatabase = await ticket.ToListAsync();

@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Index";
 }
+@model Cresk.ViewModels.TicketPriorityViewModel
 
 <h1>Tickets List</h1>
 
@@ -14,11 +15,14 @@
 <form asp-controller="DbTicket" asp-action="Index" method="get">
     <p>
         <select asp-for="TicketStatus" class="form-control" asp-items="Html.GetEnumSelectList<TicketStatus>()">
-                <option value="">All</option>
+            <option value="">All</option>
         </select>
-
-        Search: <input type="text" name="SearchString" value="@Html.ValueFor(model => model.SearchString)"/>
+        <select asp-for="TicketPriority" class="form-control" asp-items="Html.GetEnumSelectList<TicketPriority>()">
+            <option value="">All</option>
+        </select>
+        Search by name: <input type="text" name="SearchString" value="@Html.ValueFor(model => model.SearchString)"/>
         <input type="submit" value="Wyszukaj" />
+        <a asp-action="Index">Back to Full List</a>
     </p>
 </form>
 
