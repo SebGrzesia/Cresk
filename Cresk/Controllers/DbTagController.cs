@@ -40,24 +40,6 @@ namespace Cresk.Controllers
             return View(tagsListViewModel);
         }
 
-        // GET: DbTag/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.DbTag == null)
-            {
-                return NotFound();
-            }
-
-            var dbTag = await _context.DbTag
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (dbTag == null)
-            {
-                return NotFound();
-            }
-
-            return View(dbTag);
-        }
-
         // GET: DbTag/Create
         public IActionResult Create()
         {
@@ -93,7 +75,11 @@ namespace Cresk.Controllers
             {
                 return NotFound();
             }
-            return View(dbTag);
+
+            EditDbTagViewModel vmDbTag = new EditDbTagViewModel();
+            vmDbTag.Name = dbTag.Name;
+            vmDbTag.Description = dbTag.Description;
+            return View(vmDbTag);
         }
 
         // POST: DbTag/Edit/5
@@ -101,34 +87,17 @@ namespace Cresk.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Description")] DbTag dbTag)
+        public async Task<IActionResult> Edit(EditDbTagViewModel vmDbTag)
         {
-            if (id != dbTag.Id)
+            var dbTag = await _context.DbTag.FindAsync(vmDbTag.Id);
+            if (dbTag == null)
             {
-                return NotFound();
+                return View(vmDbTag);
             }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(dbTag);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DbTagExists(dbTag.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(dbTag);
+            dbTag.Name = vmDbTag.Name;
+            dbTag.Description = vmDbTag.Description;
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: DbTag/Delete/5
