@@ -1,10 +1,9 @@
 ﻿@using Cresk.Enums
-@model Cresk.ViewModels.TicketStatusViewModel
+@model Cresk.ViewModels.TicketIndexViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
-@model Cresk.ViewModels.TicketPriorityViewModel
 
 <h1>Tickets List</h1>
 
@@ -14,9 +13,11 @@
 
 <form asp-controller="DbTicket" asp-action="Index" method="get">
     <p>
+        Status:
         <select asp-for="TicketStatus" class="form-control" asp-items="Html.GetEnumSelectList<TicketStatus>()">
             <option value="">All</option>
         </select>
+        Priority:
         <select asp-for="TicketPriority" class="form-control" asp-items="Html.GetEnumSelectList<TicketPriority>()">
             <option value="">All</option>
         </select>

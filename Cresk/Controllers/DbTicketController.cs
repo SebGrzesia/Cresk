@@ -55,7 +55,7 @@ namespace Cresk.Controllers
                 TicketDisplayNumber = ticketFromDatabase.TicketDisplayNumber
             });
 
-            var indexViewModel = new TicketStatusViewModel();
+            var indexViewModel = new TicketIndexViewModel();
             indexViewModel.IndexDbTicketViewModels = ticketListViewModel.ToList();
             indexViewModel.SearchString = searchString;
             indexViewModel.TicketStatus = ticketStatus;
