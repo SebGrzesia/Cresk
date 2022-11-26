@@ -25,10 +25,10 @@ namespace Cresk.Controllers
         public async Task<IActionResult> Index(string searchString)
         {
             var tag = _context.DbTag.AsQueryable();
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    tag = tag.Where(t => t.Name!.Contains(searchString));
-            //}
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                tag = tag.Where(t => t.Name!.Contains(searchString));
+            }
             var tagFromDatabase = await tag.ToListAsync();
             var tagsListViewModel = tagFromDatabase.Select(tagFromDatabase => new IndexDbTagViewModel()
             {
