@@ -51,8 +51,12 @@ namespace Cresk.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] DbTag dbTag)
+        public async Task<IActionResult> Create(CreateDbTagViewModel vm)
         {
+            DbTag dbTag = new DbTag();
+            dbTag.Name = vm.Name;
+            dbTag.Description = vm.Description;
+
             if (ModelState.IsValid)
             {
                 _context.Add(dbTag);
