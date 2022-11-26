@@ -9,5 +9,6 @@ namespace Cresk.ViewModels
         public List<IndexDbTicketViewModel> IndexDbTicketViewModels { get; set; }
         public string SearchString { get; set; } = string.Empty;
         public TicketStatus? TicketStatus { get; set; }
+        public TicketPriority? TicketPriority { get; set; }
     }
 }

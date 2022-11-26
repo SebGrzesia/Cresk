@@ -13,12 +13,17 @@
 
 <form asp-controller="DbTicket" asp-action="Index" method="get">
     <p>
+        Status:
         <select asp-for="TicketStatus" class="form-control" asp-items="Html.GetEnumSelectList<TicketStatus>()">
-                <option value="">All</option>
+            <option value="">All</option>
         </select>
-
-        Search: <input type="text" name="SearchString" value="@Html.ValueFor(model => model.SearchString)"/>
+        Priority:
+        <select asp-for="TicketPriority" class="form-control" asp-items="Html.GetEnumSelectList<TicketPriority>()">
+            <option value="">All</option>
+        </select>
+        Search by name: <input type="text" name="SearchString" value="@Html.ValueFor(model => model.SearchString)"/>
         <input type="submit" value="Wyszukaj" />
+        <a asp-action="Index">Back to Full List</a>
     </p>
 </form>
 
