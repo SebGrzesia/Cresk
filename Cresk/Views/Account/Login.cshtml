@@ -1,36 +1,47 @@
-﻿@page
-@model Cresk.Views.Account.IndexModel
+﻿@model Cresk.ViewModels.LoginViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
 @{
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - Cresk</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/loginStyle.css" asp-append-version="true" />
+        <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+    </head>
 
-<div class="container border" style="padding:20px">
-	<form method="post">
-		<div class="text-danger" asp-validation-summary="ModelOnly"></div>
-		<div class="form-group row">
-			<div class="col-2">
-				<label asp-for="User.UserName"></label>
-			</div>
-			<div class="col-5">
-				<input type="text" asp-for="User.UserName" class="form-control"/>
-			</div>
-			<span class="text-danger" asp-validation-for="User.UserName"></span>
-		</div>
-		<div class="form-group row">
-			<div class="col-2">
-				<label asp-for="User.Password"></label>
-			</div>
-			<div class="col-5">
-				<input type="password" asp-for="User.Password" class="form-control" />
-			</div>
-			<span class="text-danger" asp-validation-for="User.Password"></span>
-		</div>
-		<div class="form-group row">
-			<div class="col-2">
-				<imput type="submit" class="btn btn-primary" value="Login"></imput>
-			</div>
-			<div class="col-5">
-
-			</div>
-		</div>
-	</form>
-</div>
+    <body>
+        <div class="overlay"></div>
+        <div class="login_layout">
+            <div class="logo">
+                <img src="~/img/name_1.png"/>
+            </div>
+            <div class="center">
+                <h1>Login</h1>
+                <form method="post" asp-action="Login">
+                    <div class="text_Field">
+                        <input asp-for="UserName" type="text" required />
+                        <span></span>
+                        <label>Username</label>
+                    </div>
+                    <div class="text_Field">
+                        <input asp-for="Password" type="password" required />
+                        <span></span>
+                        <label>Password</label>
+                    </div>
+                    <div class="forgotPass">Forgot Password?</div>
+                    <input type="submit" value="Login" />
+                    <div class="signupLink">
+                        <a href="#">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
