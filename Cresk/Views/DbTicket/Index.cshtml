@@ -56,9 +56,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-@*            <td>
-                @Html.DisplayFor(modelItem => item.EmailAddress)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.TicketStatus)
             </td>
@@ -69,13 +66,11 @@
             @{
                 if(item.ModifyDate >= DateTime.Today)
                 {
-                    //@Html.DisplayFor(modelItem => item.ModifyData.ToString("H:mm"))
                     @Html.Raw(item.ModifyDate.ToString("H:mm"))
 
                 }
                 else
                 {
-                    //@Html.DisplayFor(modelItem => item.ModifyData.ToString("MMMM dd, yyyy"))
                     @Html.Raw(item.ModifyDate.ToString("MMMM dd, yyyy"))
                 }
             }
