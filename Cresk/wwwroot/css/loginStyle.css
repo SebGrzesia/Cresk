@@ -21,7 +21,7 @@ img {
 
 .center {
     width: 400px;
-    background-color: whitesmoke;
+    background-color: #c8c8ca;
     border-radius: 15px;
 }
 
@@ -93,12 +93,6 @@ img {
     width:100%;
 }
 
-.forgotPass{
-    margin: -5px 0 20px 5px;
-    color: #a6a6a6;
-    cursor: pointer;
-}
-
 .forgotPass:hover {
     text-decoration:underline;
 }
@@ -121,7 +115,8 @@ input[type="submit"]:hover {
     transition:.5s;
 }
 
-.signupLink{
-    display:flex;
-    justify-content:center;
+.signupLink {
+    display: flex;
+    justify-content: center;
+
 }

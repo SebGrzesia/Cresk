@@ -22,5 +22,15 @@ namespace Cresk.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+        public ActionResult Register()
+        {
+            AccountRegisterViewModel vm = new AccountRegisterViewModel();
+            return View(vm);
+        }
+        [HttpPost]
+        public ActionResult Register(ViewModels.AccountRegisterViewModel vm)
+        {
+            return RedirectToAction("Login", "Account");
+        }
     }
 }
