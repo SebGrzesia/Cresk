@@ -32,9 +32,5 @@ namespace Cresk.Controllers
         {
             return RedirectToAction("Login", "Account");
         }
-        //public AcceptedResult Logout()
-        //{
-
-        //}
     }
 }
