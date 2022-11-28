@@ -9,6 +9,7 @@ using Cresk.Data;
 using Cresk.Models;
 using Cresk.ViewModels;
 using Cresk.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cresk.Controllers
 {

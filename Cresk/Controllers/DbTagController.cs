@@ -9,9 +9,11 @@ using Cresk.Data;
 using Cresk.Models;
 using Cresk.ViewModels;
 using System.Net.Sockets;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cresk.Controllers
 {
+    [Authorize]
     public class DbTagController : Controller
     {
         private readonly CreskContext _context;

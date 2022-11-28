@@ -18,7 +18,10 @@
             <img src="~/img/name_1.png"/>
         </div>
         <ul class="user-area">
-            <li><a href=""><i class="fas fa-user"></i></a></li>
+            <form method="get" asp-controller="Account" asp-action="Logout">
+                Welcome @User.Identity.Name
+                <button type="submit" class="btn btn-dark">Logout</button>
+            </form>
         </ul>
     </div>
     <div class="page-area">
@@ -53,13 +56,6 @@
                         <i class="fa-solid fa-lock" aria-hidden="true"></i>
                         <span class="navigation-link-text">
                             Privacy
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="navigation-link" asp-area="" asp-controller="Account" asp-action="Login">
-                        <span class="navigation-link-text">
-                            Login
                         </span>
                     </a>
                 </li>
