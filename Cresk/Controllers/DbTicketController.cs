@@ -79,9 +79,16 @@ namespace Cresk.Controllers
         }
 
         // GET: DbTicket/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var tags = await _context.DbTag.Select(tagFromDatabase => new SelectListItem()
+            {
+                Value = tagFromDatabase.Id,
+                Text = tagFromDatabase.Name
+            }).ToListAsync();
+            CreateDbTicketViewModel vm = new CreateDbTicketViewModel();
+            vm.TagList = tags;
+            return View(vm);
         }
 
         // POST: DbTicket/Create
@@ -91,10 +98,12 @@ namespace Cresk.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateDbTicketViewModel vm)
         {
-            //IQueryable<string> tagsQuery = from m in _context.DbTicket orderby m.DbTag select m.DbTagId;
 
             DbTicket dbTicket = new DbTicket();
-            dbTicket.DbTagId = vm.TagName;
+            if (!string.IsNullOrWhiteSpace(vm.TagId))
+            {
+                dbTicket.DbTagId = vm.TagId;
+            }
             dbTicket.Title = vm.Title;
             dbTicket.Description = vm.Description;
             dbTicket.Priority = vm.Priority;
@@ -105,13 +114,13 @@ namespace Cresk.Controllers
 
             //_context.DbTag.FirstOrDefault(m => m.Id == dbTicket.TagId);
 
-            if (ModelState.IsValid)
-            {
-                _context.Add(dbTicket);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(dbTicket);
+            //if (ModelState.IsValid)
+            //{
+            _context.Add(dbTicket);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            //}
+            //return View(vm);
         }
 
         // GET: DbTicket/Edit/5
