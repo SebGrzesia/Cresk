@@ -23,9 +23,9 @@ namespace Cresk.Controllers
         }
 
         // GET: DbTicket
-        public async Task<IActionResult> Index(string searchString, TicketStatus? ticketStatus, TicketPriority? ticketPriority)
+        public async Task<IActionResult> Index(string searchString, TicketStatus? ticketStatus, TicketPriority? ticketPriority, string tagId)
         {
-            var ticket = _context.DbTicket.AsQueryable();
+            var ticket = _context.DbTicket.Include(i => i.DbTag).AsQueryable();
             
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -41,13 +41,26 @@ namespace Cresk.Controllers
             {
                 ticket = ticket.Where(j => j.Priority == ticketPriority);
             }
+
+            if (!string.IsNullOrWhiteSpace(tagId))
+            {
+                ticket = ticket.Where(k => k.DbTagId == tagId);
+            }
+
             ticket = ticket.OrderByDescending(t => t.CreatedDate);
             var ticketsFromDatabase = await ticket.ToListAsync();
+            var tags = await _context.DbTag.Select(tagFromDatabase => new SelectListItem()
+            {
+                Value = tagFromDatabase.Id,
+                Text = tagFromDatabase.Name
+            }).ToListAsync();
+
 
             var ticketListViewModel = ticketsFromDatabase.Select(ticketFromDatabase => new IndexDbTicketViewModel()
             {
+                TagName = ticketFromDatabase.DbTag!=null?ticketFromDatabase.DbTag.Name:"----", 
                 Description = ticketFromDatabase.Description,
-                ModifyDate = ticketFromDatabase.ModifyData,
+                ModifyDate = ticketFromDatabase.ModifyData, 
                 EmailAddress = ticketFromDatabase.Email,
                 TicketPriority = ticketFromDatabase.Priority,
                 TicketStatus = ticketFromDatabase.Status,
@@ -60,6 +73,7 @@ namespace Cresk.Controllers
             indexViewModel.IndexDbTicketViewModels = ticketListViewModel.ToList();
             indexViewModel.SearchString = searchString;
             indexViewModel.TicketStatus = ticketStatus;
+            indexViewModel.TagList= tags;
 
             return View(indexViewModel);
         }
@@ -77,9 +91,10 @@ namespace Cresk.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateDbTicketViewModel vm)
         {
-
+            //IQueryable<string> tagsQuery = from m in _context.DbTicket orderby m.DbTag select m.DbTagId;
 
             DbTicket dbTicket = new DbTicket();
+            dbTicket.DbTagId = vm.TagName;
             dbTicket.Title = vm.Title;
             dbTicket.Description = vm.Description;
             dbTicket.Priority = vm.Priority;

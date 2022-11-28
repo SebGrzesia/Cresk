@@ -14,13 +14,18 @@
 <form asp-controller="DbTicket" asp-action="Index" method="get">
     <p>
         Status:
-        <select asp-for="TicketStatus" class="form-control" asp-items="Html.GetEnumSelectList<TicketStatus>()">
+        <select asp-for="TicketStatus" asp-items="Html.GetEnumSelectList<TicketStatus>()">
             <option value="">All</option>
         </select>
         Priority:
-        <select asp-for="TicketPriority" class="form-control" asp-items="Html.GetEnumSelectList<TicketPriority>()">
+        <select asp-for="TicketPriority" asp-items="Html.GetEnumSelectList<TicketPriority>()">
             <option value="">All</option>
         </select>
+        Tags:
+        <select asp-for="TagId" asp-items="Model.TagList">
+            <option value="">No</option>
+        </select>
+
         Search by name: <input type="text" name="SearchString" value="@Html.ValueFor(model => model.SearchString)"/>
         <input type="submit" value="Wyszukaj" />
         <a asp-action="Index">Back to Full List</a>
@@ -35,6 +40,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IndexDbTicketViewModels[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IndexDbTicketViewModels[0].TagName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IndexDbTicketViewModels[0].TicketStatus)
@@ -55,6 +63,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TagName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TicketStatus)

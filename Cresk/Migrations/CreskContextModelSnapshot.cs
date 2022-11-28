@@ -37,7 +37,7 @@ namespace Cresk.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DbTag");
+                    b.ToTable("DbTag", (string)null);
                 });
 
             modelBuilder.Entity("Cresk.Models.DbTicket", b =>
@@ -82,7 +82,7 @@ namespace Cresk.Migrations
 
                     b.HasIndex("DbTagId");
 
-                    b.ToTable("DbTicket");
+                    b.ToTable("DbTicket", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

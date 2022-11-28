@@ -1,4 +1,5 @@
 ﻿using Cresk.Enums;
+using Cresk.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,6 +14,8 @@ namespace Cresk.ViewModels
         public string Title { get; set; }
         [Display(Name = "Description")]
         public string Description { get; set; }
+        [Display(Name = "Tags")]
+        public string TagName { get; set; }
         [Display(Name = "Email address")]
         public string EmailAddress { get; set; }
         [Display(Name = "Status")]
