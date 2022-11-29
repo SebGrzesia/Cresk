@@ -112,10 +112,6 @@ namespace Cresk.Controllers
             dbTicket.ModifyData = DateTime.Now;
             dbTicket.Status = TicketStatus.New;           
 
-            //_context.DbTag.FirstOrDefault(m => m.Id == dbTicket.TagId);
-
-            //if (ModelState.IsValid)
-            //{
             _context.Add(dbTicket);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -136,8 +132,14 @@ namespace Cresk.Controllers
             {
                 return NotFound();
             }
+            var tags = await _context.DbTag.Select(tagFromDatabase => new SelectListItem()
+            {
+                Value = tagFromDatabase.Id,
+                Text = tagFromDatabase.Name
+            }).ToListAsync();
 
             EditDbTicketViewModel vm = new EditDbTicketViewModel();
+            vm.TagList = tags;
             vm.Title = dbTicket.Title;
             vm.Status = dbTicket.Status;
             vm.Priority = dbTicket.Priority;
@@ -159,6 +161,10 @@ namespace Cresk.Controllers
             if(dbTicket == null)
             {
                 return View(vm);
+            }
+            if (!string.IsNullOrWhiteSpace(vm.TagId))
+            {
+                dbTicket.DbTagId = vm.TagId;
             }
 
             dbTicket.Status = vm.Status;

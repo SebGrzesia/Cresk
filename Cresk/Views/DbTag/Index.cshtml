@@ -7,16 +7,16 @@
 <h1>Tags list</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
 
 <form asp-controller="DbTag" asp-action="Index" method="get">
     <p>
-        Nazwa: <input type="text" name="SearchString" />
-        <input type="submit" value="Wyszukaj" />
+        Search by name: <input type="text" name="SearchString" class="form-control" />
+        <input type="submit" class="btn btn-success" value="Wyszukaj" />
     </p>
 </form>
-<a asp-action="Index">Back to Full List</a>
+<a asp-action="Index" class="btn btn-info">Back to Full List</a>
 
 <table class="table">
     <thead>
@@ -39,8 +39,8 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="fa-solid fa-circle-info"></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="fa-solid fa-trash"></a>
             </td>
         </tr>
 }
