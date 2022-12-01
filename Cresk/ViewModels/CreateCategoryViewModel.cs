@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cresk.ViewModels
 {
-    public class CreateDbTagViewModel
+    public class CreateCategoryViewModel
     {
         [Display(Name="Title")]
         public string Name { get; set; }

@@ -15,7 +15,7 @@ namespace Cresk.ViewModels
         [Display(Name = "Description")]
         public string Description { get; set; }
         [Display(Name = "Tags")]
-        public string TagName { get; set; }
+        public string CategoryName { get; set; }
         [Display(Name = "Email address")]
         public string EmailAddress { get; set; }
         [Display(Name = "Status")]

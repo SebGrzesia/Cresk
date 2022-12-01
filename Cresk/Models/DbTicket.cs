@@ -15,8 +15,8 @@ namespace Cresk.Models
         public int TicketDisplayNumber { get; set; }
         [Display(Name = "Tytuł zgłoszenia")]
         public string Title { get; set; }
-        public string? DbTagId { get; set; }
-        public DbTag? DbTag { get; set; }
+        public string? CategoryId { get; set; }
+        public TicketCategory? Category { get; set; }
         [Display(Name = "Opis zgłoszenia")]
         public string Description { get; set; }
         [Display(Name = "Adres email")]

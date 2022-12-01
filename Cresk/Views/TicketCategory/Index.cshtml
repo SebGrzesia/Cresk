@@ -1,16 +1,16 @@
-﻿@model IEnumerable<Cresk.ViewModels.IndexDbTagViewModel>
+﻿@model IEnumerable<Cresk.ViewModels.IndexCategoryViewModel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Tags list</h1>
+<h1>Category list</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
 
-<form asp-controller="DbTag" asp-action="Index" method="get">
+<form asp-controller="TicketCategory" asp-action="Index" method="get">
     <p>
         Search by name: <input type="text" name="SearchString" class="form-control" />
         <input type="submit" class="btn btn-success" value="Wyszukaj" />
@@ -40,7 +40,7 @@
             </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="fa-solid fa-circle-info"></a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="fa-solid fa-trash"></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="fa-solid fa-trash text-danger"></a>
             </td>
         </tr>
 }

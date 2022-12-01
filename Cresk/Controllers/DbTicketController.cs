@@ -25,7 +25,7 @@ namespace Cresk.Controllers
         // GET: DbTicket
         public async Task<IActionResult> Index(string searchString, TicketStatus? ticketStatus, TicketPriority? ticketPriority, string tagId)
         {
-            var ticket = _context.DbTicket.Include(i => i.DbTag).AsQueryable();
+            var ticket = _context.DbTicket.Include(i => i.Category).AsQueryable();
             
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -44,21 +44,21 @@ namespace Cresk.Controllers
 
             if (!string.IsNullOrWhiteSpace(tagId))
             {
-                ticket = ticket.Where(k => k.DbTagId == tagId);
+                ticket = ticket.Where(k => k.CategoryId == tagId);
             }
 
             ticket = ticket.OrderByDescending(t => t.CreatedDate);
             var ticketsFromDatabase = await ticket.ToListAsync();
-            var tags = await _context.DbTag.Select(tagFromDatabase => new SelectListItem()
+            var tags = await _context.TicketCategories.Select(categoryFromDatabase => new SelectListItem()
             {
-                Value = tagFromDatabase.Id,
-                Text = tagFromDatabase.Name
+                Value = categoryFromDatabase.Id,
+                Text = categoryFromDatabase.Name
             }).ToListAsync();
 
 
             var ticketListViewModel = ticketsFromDatabase.Select(ticketFromDatabase => new IndexDbTicketViewModel()
             {
-                TagName = ticketFromDatabase.DbTag!=null?ticketFromDatabase.DbTag.Name:"----", 
+                CategoryName = ticketFromDatabase.Category!=null?ticketFromDatabase.Category.Name:"----", 
                 Description = ticketFromDatabase.Description,
                 ModifyDate = ticketFromDatabase.ModifyData, 
                 EmailAddress = ticketFromDatabase.Email,
@@ -81,13 +81,13 @@ namespace Cresk.Controllers
         // GET: DbTicket/Create
         public async Task<IActionResult> Create()
         {
-            var tags = await _context.DbTag.Select(tagFromDatabase => new SelectListItem()
+            var tags = await _context.TicketCategories.Select(categoryFromDatabase => new SelectListItem()
             {
-                Value = tagFromDatabase.Id,
-                Text = tagFromDatabase.Name
+                Value = categoryFromDatabase.Id,
+                Text = categoryFromDatabase.Name
             }).ToListAsync();
             CreateDbTicketViewModel vm = new CreateDbTicketViewModel();
-            vm.TagList = tags;
+            vm.CategoryList = tags;
             return View(vm);
         }
 
@@ -100,14 +100,14 @@ namespace Cresk.Controllers
         {
 
             DbTicket dbTicket = new DbTicket();
-            if (!string.IsNullOrWhiteSpace(vm.TagId))
+            if (!string.IsNullOrWhiteSpace(vm.CategoryId))
             {
-                dbTicket.DbTagId = vm.TagId;
+                dbTicket.CategoryId = vm.CategoryId;
             }
             dbTicket.Title = vm.Title;
             dbTicket.Description = vm.Description;
             dbTicket.Priority = vm.Priority;
-            dbTicket.Email = vm.Email;
+            dbTicket.Email = User.Identity.Name;
             dbTicket.CreatedDate = DateTime.Now;
             dbTicket.ModifyData = DateTime.Now;
             dbTicket.Status = TicketStatus.New;           
@@ -132,14 +132,14 @@ namespace Cresk.Controllers
             {
                 return NotFound();
             }
-            var tags = await _context.DbTag.Select(tagFromDatabase => new SelectListItem()
+            var tags = await _context.TicketCategories.Select(categoryFromDatabase => new SelectListItem()
             {
-                Value = tagFromDatabase.Id,
-                Text = tagFromDatabase.Name
+                Value = categoryFromDatabase.Id,
+                Text = categoryFromDatabase.Name
             }).ToListAsync();
 
             EditDbTicketViewModel vm = new EditDbTicketViewModel();
-            vm.TagList = tags;
+            vm.CategoryList = tags;
             vm.Title = dbTicket.Title;
             vm.Status = dbTicket.Status;
             vm.Priority = dbTicket.Priority;
@@ -162,9 +162,9 @@ namespace Cresk.Controllers
             {
                 return View(vm);
             }
-            if (!string.IsNullOrWhiteSpace(vm.TagId))
+            if (!string.IsNullOrWhiteSpace(vm.CategoryId))
             {
-                dbTicket.DbTagId = vm.TagId;
+                dbTicket.CategoryId = vm.CategoryId;
             }
 
             dbTicket.Status = vm.Status;
@@ -213,11 +213,6 @@ namespace Cresk.Controllers
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool DbTicketExists(string id)
-        {
-          return _context.DbTicket.Any(e => e.Id == id);
         }
     }
 }

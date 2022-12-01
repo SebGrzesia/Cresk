@@ -14,9 +14,8 @@ namespace Cresk.ViewModels
         public string Description { get; set; }
         [Display(Name = "Email address")]
         [DataType(DataType.EmailAddress, ErrorMessage = "Email is invalid")]
-        public List<SelectListItem> TagList { get; set; }
-        public string TagId { get; set; }
-        public string Email { get; set; }
+        public List<SelectListItem> CategoryList { get; set; }
+        public string? CategoryId { get; set; }
         public TicketPriority Priority { get; set; }
     }
  

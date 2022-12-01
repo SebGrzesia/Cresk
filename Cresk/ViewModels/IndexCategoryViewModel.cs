@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Cresk.ViewModels
 {
-    public class IndexDbTagViewModel
+    public class IndexCategoryViewModel
     {
         public string Id { get; set; }
         [Display(Name = "Title")]

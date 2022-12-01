@@ -14,11 +14,11 @@ using Microsoft.AspNetCore.Authorization;
 namespace Cresk.Controllers
 {
     [Authorize]
-    public class DbTagController : Controller
+    public class TicketCategoryController : Controller
     {
         private readonly CreskContext _context;
 
-        public DbTagController(CreskContext context)
+        public TicketCategoryController(CreskContext context)
         {
             _context = context;
         }
@@ -26,20 +26,20 @@ namespace Cresk.Controllers
         // GET: DbTag
         public async Task<IActionResult> Index(string searchString)
         {
-            var tag = _context.DbTag.AsQueryable();
+            var category = _context.TicketCategories.AsQueryable();
             if (!String.IsNullOrEmpty(searchString))
             {
-                tag = tag.Where(t => t.Name!.Contains(searchString));
+                category = category.Where(t => t.Name!.Contains(searchString));
             }
-            var tagFromDatabase = await tag.ToListAsync();
-            var tagsListViewModel = tagFromDatabase.Select(tagFromDatabase => new IndexDbTagViewModel()
+            var categoriesFromDatabase = await category.ToListAsync();
+            var categoriesListViewModel = categoriesFromDatabase.Select(categoryFromDatabase => new IndexCategoryViewModel()
             {
-                Id = tagFromDatabase.Id,
-                Name = tagFromDatabase.Name,
-                Description = tagFromDatabase.Description
+                Id = categoryFromDatabase.Id,
+                Name = categoryFromDatabase.Name,
+                Description = categoryFromDatabase.Description
             });
 
-            return View(tagsListViewModel);
+            return View(categoriesListViewModel);
         }
 
         // GET: DbTag/Create
@@ -53,39 +53,39 @@ namespace Cresk.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateDbTagViewModel vm)
+        public async Task<IActionResult> Create(CreateCategoryViewModel vm)
         {
-            DbTag dbTag = new DbTag();
-            dbTag.Name = vm.Name;
-            dbTag.Description = vm.Description;
+            TicketCategory category = new TicketCategory();
+            category.Name = vm.Name;
+            category.Description = vm.Description;
 
             if (ModelState.IsValid)
             {
-                _context.Add(dbTag);
+                _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(dbTag);
+            return View(category);
         }
 
         // GET: DbTag/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
-            if (id == null || _context.DbTag == null)
+            if (id == null || _context.TicketCategories == null)
             {
                 return NotFound();
             }
 
-            var dbTag = await _context.DbTag.FindAsync(id);
-            if (dbTag == null)
+            var category = await _context.TicketCategories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            EditDbTagViewModel vmDbTag = new EditDbTagViewModel();
-            vmDbTag.Name = dbTag.Name;
-            vmDbTag.Description = dbTag.Description;
-            return View(vmDbTag);
+            EditCategoryViewModel vm = new EditCategoryViewModel();
+            vm.Name = category.Name;
+            vm.Description = category.Description;
+            return View(vm);
         }
 
         // POST: DbTag/Edit/5
@@ -93,15 +93,15 @@ namespace Cresk.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(EditDbTagViewModel vmDbTag)
+        public async Task<IActionResult> Edit(EditCategoryViewModel vm)
         {
-            var dbTag = await _context.DbTag.FindAsync(vmDbTag.Id);
-            if (dbTag == null)
+            var category = await _context.TicketCategories.FindAsync(vm.Id);
+            if (category == null)
             {
-                return View(vmDbTag);
+                return View(vm);
             }
-            dbTag.Name = vmDbTag.Name;
-            dbTag.Description = vmDbTag.Description;
+            category.Name = vm.Name;
+            category.Description = vm.Description;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -109,19 +109,19 @@ namespace Cresk.Controllers
         // GET: DbTag/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null || _context.DbTag == null)
+            if (id == null || _context.TicketCategories == null)
             {
                 return NotFound();
             }
 
-            var dbTag = await _context.DbTag
+            var category = await _context.TicketCategories
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (dbTag == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(dbTag);
+            return View(category);
         }
 
         // POST: DbTag/Delete/5
@@ -129,23 +129,18 @@ namespace Cresk.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            if (_context.DbTag == null)
+            if (_context.TicketCategories == null)
             {
-                return Problem("Entity set 'CreskContext.DbTag'  is null.");
+                return Problem("Entity set 'CreskContext.Category'  is null.");
             }
-            var dbTag = await _context.DbTag.FindAsync(id);
-            if (dbTag != null)
+            var category = await _context.TicketCategories.FindAsync(id);
+            if (category != null)
             {
-                _context.DbTag.Remove(dbTag);
+                _context.TicketCategories.Remove(category);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool DbTagExists(string id)
-        {
-          return _context.DbTag.Any(e => e.Id == id);
         }
     }
 }

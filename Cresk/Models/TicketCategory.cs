@@ -2,13 +2,13 @@
 
 namespace Cresk.Models
 {
-    public class DbTag
+    public class TicketCategory
     {
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public DbTag()
+        public TicketCategory()
         {
             this.Id = Guid.NewGuid().ToString();
         }

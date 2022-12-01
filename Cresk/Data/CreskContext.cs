@@ -18,7 +18,7 @@ namespace Cresk.Data
 
         public DbSet<Cresk.Models.DbTicket> DbTicket { get; set; } = default!;
 
-        public DbSet<Cresk.Models.DbTag> DbTag { get; set; }
+        public DbSet<Cresk.Models.TicketCategory> TicketCategories { get; set; }
 
     }
 }

@@ -22,34 +22,16 @@ namespace Cresk.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Cresk.Models.DbTag", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DbTag", (string)null);
-                });
-
             modelBuilder.Entity("Cresk.Models.DbTicket", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("DbTagId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -80,9 +62,27 @@ namespace Cresk.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DbTagId");
+                    b.HasIndex("CategoryId");
 
-                    b.ToTable("DbTicket", (string)null);
+                    b.ToTable("DbTicket");
+                });
+
+            modelBuilder.Entity("Cresk.Models.TicketCategory", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TicketCategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -285,11 +285,11 @@ namespace Cresk.Migrations
 
             modelBuilder.Entity("Cresk.Models.DbTicket", b =>
                 {
-                    b.HasOne("Cresk.Models.DbTag", "DbTag")
+                    b.HasOne("Cresk.Models.TicketCategory", "Category")
                         .WithMany()
-                        .HasForeignKey("DbTagId");
+                        .HasForeignKey("CategoryId");
 
-                    b.Navigation("DbTag");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

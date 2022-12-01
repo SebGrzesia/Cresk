@@ -2,7 +2,7 @@
 
 namespace Cresk.ViewModels
 {
-    public class EditDbTagViewModel
+    public class EditCategoryViewModel
     {
         public string Id { get; set; }
         [Display(Name="Title")]
