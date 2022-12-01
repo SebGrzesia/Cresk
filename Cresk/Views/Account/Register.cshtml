@@ -26,11 +26,6 @@
                 <h1>Register</h1>
                 <form method="post" asp-action="Register">
                     <div class="text_Field">
-                        <input asp-for="Name" type="text" required />
-                        <span></span>
-                        <label>Username</label>
-                    </div>
-                    <div class="text_Field">
                         <input asp-for="Email" type="text" required />
                         <span></span>
                         <label>E-mail</label>
@@ -43,7 +38,7 @@
                     <div class="text_Field">
                         <input asp-for="Password2" type="password" required />
                         <span></span>
-                        <label>Password</label>
+                        <label>Confirm password</label>
                     </div>
                     <input type="submit" value="Register" />
                     <div class="signupLink">
