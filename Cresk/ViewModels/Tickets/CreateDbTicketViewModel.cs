@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Cresk.ViewModels
+namespace Cresk.ViewModels.Tickets
 {
     public class CreateDbTicketViewModel
     {
@@ -18,5 +18,5 @@ namespace Cresk.ViewModels
         public string? CategoryId { get; set; }
         public TicketPriority Priority { get; set; }
     }
- 
+
 }

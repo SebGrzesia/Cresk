@@ -1,5 +1,5 @@
 ﻿@using Cresk.Enums
-@model Cresk.ViewModels.TicketIndexViewModel
+@model Cresk.ViewModels.Tickets.TicketIndexViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -30,8 +30,8 @@
                 </select>
             </div>
         </div>
-        Tags:
-        <select asp-for="TagId" asp-items="Model.TagList" class="form-select">
+        Category:
+        <select asp-for="CategoryId" asp-items="Model.CategoryList" class="form-select">
             <option value="">No</option>
         </select>
         <input type="submit" class="btn btn-success" value="Wyszukaj" />
@@ -96,7 +96,7 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="fa-solid fa-circle-info"></a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="fa-solid fa-trash"></a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="fa-solid fa-trash text-danger"></a>
             </td>
         </tr>
 }

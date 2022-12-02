@@ -3,18 +3,18 @@ using Cresk.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Cresk.ViewModels
+namespace Cresk.ViewModels.Tickets
 {
     public class IndexDbTicketViewModel
     {
         public string Id { get; set; }
-        [Display(Name = "ID")]
+        [Display(Name = "Number")]
         public int TicketDisplayNumber { get; set; }
         [Display(Name = "Title")]
         public string Title { get; set; }
         [Display(Name = "Description")]
         public string Description { get; set; }
-        [Display(Name = "Tags")]
+        [Display(Name = "Category")]
         public string CategoryName { get; set; }
         [Display(Name = "Email address")]
         public string EmailAddress { get; set; }

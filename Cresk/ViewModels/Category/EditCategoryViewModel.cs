@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Cresk.ViewModels
+namespace Cresk.ViewModels.Category
 {
-    public class CreateCategoryViewModel
+    public class EditCategoryViewModel
     {
-        [Display(Name="Title")]
+        public string Id { get; set; }
+        [Display(Name = "Title")]
         public string Name { get; set; }
         [Display(Name = "Description")]
         public string Description { get; set; }

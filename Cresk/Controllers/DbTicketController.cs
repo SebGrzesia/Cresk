@@ -10,6 +10,7 @@ using Cresk.Models;
 using Cresk.ViewModels;
 using Cresk.Enums;
 using Microsoft.AspNetCore.Authorization;
+using Cresk.ViewModels.Tickets;
 
 namespace Cresk.Controllers
 {
@@ -23,7 +24,7 @@ namespace Cresk.Controllers
         }
 
         // GET: DbTicket
-        public async Task<IActionResult> Index(string searchString, TicketStatus? ticketStatus, TicketPriority? ticketPriority, string tagId)
+        public async Task<IActionResult> Index(string searchString, TicketStatus? ticketStatus, TicketPriority? ticketPriority, string categoryId)
         {
             var ticket = _context.DbTicket.Include(i => i.Category).AsQueryable();
             
@@ -42,9 +43,9 @@ namespace Cresk.Controllers
                 ticket = ticket.Where(j => j.Priority == ticketPriority);
             }
 
-            if (!string.IsNullOrWhiteSpace(tagId))
+            if (!string.IsNullOrWhiteSpace(categoryId))
             {
-                ticket = ticket.Where(k => k.CategoryId == tagId);
+                ticket = ticket.Where(k => k.CategoryId == categoryId);
             }
 
             ticket = ticket.OrderByDescending(t => t.CreatedDate);
@@ -73,7 +74,7 @@ namespace Cresk.Controllers
             indexViewModel.IndexDbTicketViewModels = ticketListViewModel.ToList();
             indexViewModel.SearchString = searchString;
             indexViewModel.TicketStatus = ticketStatus;
-            indexViewModel.TagList= tags;
+            indexViewModel.CategoryList= tags;
 
             return View(indexViewModel);
         }

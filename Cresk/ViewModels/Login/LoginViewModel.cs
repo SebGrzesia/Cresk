@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Cresk.ViewModels
+namespace Cresk.ViewModels.Login
 {
     public class LoginViewModel
     {

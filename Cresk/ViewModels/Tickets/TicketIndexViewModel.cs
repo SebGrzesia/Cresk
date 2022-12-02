@@ -2,7 +2,7 @@
 using Cresk.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Cresk.ViewModels
+namespace Cresk.ViewModels.Tickets
 {
     public class TicketIndexViewModel
     {
@@ -10,7 +10,7 @@ namespace Cresk.ViewModels
         public string SearchString { get; set; } = string.Empty;
         public TicketStatus? TicketStatus { get; set; }
         public TicketPriority? TicketPriority { get; set; }
-        public List<SelectListItem> TagList { get; set; }
-        public string TagId { get; set; }
+        public List<SelectListItem> CategoryList { get; set; }
+        public string CategoryId { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Cresk.ViewModels.IndexCategoryViewModel>
+﻿@model IEnumerable<Cresk.ViewModels.Category.IndexCategoryViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,9 +14,9 @@
     <p>
         Search by name: <input type="text" name="SearchString" class="form-control" />
         <input type="submit" class="btn btn-success" value="Wyszukaj" />
+        <a asp-action="Index" class="btn btn-info">Back to Full List</a>
     </p>
 </form>
-<a asp-action="Index" class="btn btn-info">Back to Full List</a>
 
 <table class="table">
     <thead>
@@ -39,8 +39,8 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="fa-solid fa-circle-info"></a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="fa-solid fa-trash text-danger"></a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="fa-solid fa-circle-info"></a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="fa-solid fa-trash text-danger"></a>
             </td>
         </tr>
 }

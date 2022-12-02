@@ -1,7 +1,7 @@
 ﻿using Cresk.Data;
 using Microsoft.AspNetCore.Mvc;
-using Cresk.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Cresk.ViewModels.Login;
 
 namespace Cresk.Controllers
 {
@@ -29,7 +29,7 @@ namespace Cresk.Controllers
             return View(vm);
         }
         [HttpPost]
-        public async Task<ActionResult> Login(ViewModels.LoginViewModel vm)
+        public async Task<ActionResult> Login(LoginViewModel vm)
         {
             var result = await _signInManager.PasswordSignInAsync(vm.UserName, vm.Password, false, false);
             if (result.Succeeded)
@@ -47,7 +47,7 @@ namespace Cresk.Controllers
             return View(vm);
         }
         [HttpPost]
-        public async Task<ActionResult> Register(ViewModels.AccountRegisterViewModel vm)
+        public async Task<ActionResult> Register(AccountRegisterViewModel vm)
         {
             var user = new IdentityUser()
             {

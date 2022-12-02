@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using System.ComponentModel.DataAnnotations;
 
-namespace Cresk.ViewModels
+namespace Cresk.ViewModels.Category
 {
     public class IndexCategoryViewModel
     {
         public string Id { get; set; }
         [Display(Name = "Title")]
         public string Name { get; set; }
-        [Display(Name= "Description")]
+        [Display(Name = "Description")]
         public string Description { get; set; }
     }
 }

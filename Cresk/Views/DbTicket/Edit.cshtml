@@ -1,5 +1,5 @@
 ﻿@using Cresk.Enums
-@model Cresk.ViewModels.EditDbTicketViewModel
+@model Cresk.ViewModels.Tickets.EditDbTicketViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -34,7 +34,7 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                Tags:
+                Category:
                 <select asp-for="CategoryId" asp-items="Model.CategoryList" class="form-select">
                     <option value="">No</option>
                 </select>
@@ -54,14 +54,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" class="form-control" readonly="readonly"/>
+                <div class="form-control" readonly="readonly">
+                    @Html.DisplayFor(x => x.CreateDate)
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="ModifyDate" class="control-label"></label>
-                <input asp-for="ModifyDate" class="form-control" readonly="readonly"/>
+                <div class="form-control" readonly="readonly">
+                    @Html.DisplayFor(x => x.ModifyDate)
+                </div>
             </div>
-            
-
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

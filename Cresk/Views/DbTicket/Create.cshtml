@@ -1,5 +1,5 @@
 ﻿@using Cresk.Enums
-@model Cresk.ViewModels.CreateDbTicketViewModel
+@model Cresk.ViewModels.Tickets.CreateDbTicketViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -24,7 +24,7 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                Tags:
+                Category:
                 <select asp-for="CategoryId" asp-items="Model.CategoryList" class="form-select">
                     <option value="">No</option>
                 </select>
