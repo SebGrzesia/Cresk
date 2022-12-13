@@ -67,7 +67,6 @@
             </main>
         </div>
     </div>
-     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -97,6 +96,11 @@
             link.classList.toggle('hide');
         });
     }
+
+    $(".modal-link").click(function() {
+    $('#modal').modal('show');
+        });
     </script>
+
 </body>
 </html>

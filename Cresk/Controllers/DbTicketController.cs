@@ -115,9 +115,13 @@ namespace Cresk.Controllers
 
             _context.Add(dbTicket);
             await _context.SaveChangesAsync();
+
+            var chat = new Chat();
+            chat.DbTicketId = dbTicket.Id;
+            _context.Chats.Add(chat);
+            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
-            //}
-            //return View(vm);
         }
 
         // GET: DbTicket/Edit/5
