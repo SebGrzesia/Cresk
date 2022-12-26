@@ -20,5 +20,6 @@ namespace Cresk.Data
 
         public DbSet<Cresk.Models.TicketCategory> TicketCategories { get; set; }
 
+        public DbSet<Cresk.Models.Company> Companies { get; set; }
     }
 }
