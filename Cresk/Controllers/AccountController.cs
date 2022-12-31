@@ -70,6 +70,12 @@ namespace Cresk.Controllers
             }
             else
             {
+                var companies = await _context.Companies.ToListAsync();
+                vm.CompanyList = companies.Select(company => new SelectListItem()
+                {
+                    Value = company.Id,
+                    Text = company.CompanyName
+                }).ToList();
                 return View(vm);
             }
             return RedirectToAction("Login", "Account");
