@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Cresk.ViewModels.Login;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Cresk.Controllers
 {
@@ -41,9 +43,15 @@ namespace Cresk.Controllers
                 return View(vm);
             }
         }
-        public ActionResult Register()
+        public async Task<ActionResult> Register()
         {
             AccountRegisterViewModel vm = new AccountRegisterViewModel();
+            var companies = await _context.Companies.ToListAsync();
+            vm.CompanyList = companies.Select(company => new SelectListItem()
+            {
+                Value = company.Id,
+                Text = company.CompanyName
+            }).ToList();
             return View(vm);
         }
         [HttpPost]

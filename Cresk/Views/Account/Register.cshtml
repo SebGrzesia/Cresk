@@ -40,6 +40,10 @@
                         <span></span>
                         <label>Confirm password</label>
                     </div>
+                    <div class="text_Field">
+                        <select asp-for="CompanyId" asp-items="Model.CompanyList" class="form-select">
+                        </select>
+                    </div>
                     <input type="submit" value="Register" />
                     <div class="signupLink">
                         <a asp-area="" asp-controller="Account" asp-action="Login">Cancel</a>
