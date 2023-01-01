@@ -11,17 +11,22 @@ using Cresk.ViewModels;
 using Cresk.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Cresk.ViewModels.Tickets;
+using Cresk.ViewModels.Chat;
+using Microsoft.AspNetCore.Identity;
 
 namespace Cresk.Controllers
 {
     public class DbTicketController : Controller
     {
         private readonly CreskContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public DbTicketController(CreskContext context)
+        public DbTicketController(CreskContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
 
         // GET: DbTicket
         public async Task<IActionResult> Index(string searchString, TicketStatus? ticketStatus, TicketPriority? ticketPriority, string categoryId)
@@ -143,6 +148,17 @@ namespace Cresk.Controllers
                 Text = categoryFromDatabase.Name
             }).ToListAsync();
 
+            var chat = await _context.Chats.FirstOrDefaultAsync(m => m.DbTicketId == dbTicket.Id);
+            var chatMessages = await _context.ChatMessages
+                .Where(t => t.ChatId == chat.Id)
+                .Select(t => new ChatMessageViewModel()
+                {
+                    CreateTime = t.CreateTime,
+                    Message = t.Message,
+                    Username = t.Username
+                })
+                .ToListAsync();
+
             EditDbTicketViewModel vm = new EditDbTicketViewModel();
             vm.CategoryList = tags;
             vm.Title = dbTicket.Title;
@@ -152,6 +168,7 @@ namespace Cresk.Controllers
             vm.Description = dbTicket.Description;
             vm.CreateDate = dbTicket.CreatedDate;
             vm.ModifyDate = dbTicket.ModifyData;
+            vm.ChatMessageViewModels = chatMessages;
             return View(vm);
         }
 
@@ -182,6 +199,25 @@ namespace Cresk.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddMessage(string message, string dbTicketId)
+        {
+            var chat = await _context.Chats.FirstOrDefaultAsync(m => m.DbTicketId == dbTicketId);
+            var userId = _userManager.GetUserId(User);
+            var chatMessage = new ChatMessage()
+            {
+                ChatId = chat.Id,
+                CreateTime = DateTime.Now,
+                Message = message,
+                UserId = userId,
+                Username = User.Identity.Name
+            };
+            await _context.ChatMessages.AddAsync(chatMessage);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Edit), new {id = dbTicketId});
+        }
+
 
         // GET: DbTicket/Delete/5
         public async Task<IActionResult> Delete(string id)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cresk.Models
 {
@@ -6,6 +7,7 @@ namespace Cresk.Models
     {
         public string Id { get; set; }
         public string Message { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy HH:mm}")]
         public DateTime CreateTime { get; set; }
         public string Username { get; set; }
         public string UserId { get; set; }

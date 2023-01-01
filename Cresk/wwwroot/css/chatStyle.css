@@ -1,0 +1,61 @@
+﻿* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    list-style:none;
+    text-decoration:none;
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h2{
+    margin:0;
+    padding:0;
+}
+
+p{
+    margin:0;
+    padding:0;
+}
+
+a{
+    text-decoration:none;
+}
+
+.chatView {
+    background-color: whitesmoke;
+    margin: 20px 100px 0 100px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.chatView .topChatSite {
+    border-bottom: 1px solid rgb(0, 0, 0, .100);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-content:center;
+}
+
+.chatView .topChatSite .h2{
+
+}
+
+
+.chatView .chatMessage {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatView .chatMessage .messages{
+    margin-bottom:5px;
+    background-color:rgba(38, 50, 56, 0.4);
+    padding:15px;
+    border: 1px solid;
+    border-radius:30px;
+}
+
+.chatView .chatMessage .messages .p{
+    margin-bottom:0;
+    flex-wrap:wrap;
+}
