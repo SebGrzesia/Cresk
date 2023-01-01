@@ -1,5 +1,6 @@
 ﻿using Cresk.Enums;
 using Cresk.Models;
+using Cresk.ViewModels.Chat;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
@@ -24,5 +25,6 @@ namespace Cresk.ViewModels.Tickets
         public DateTime CreateDate { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy HH:mm}")]
         public DateTime ModifyDate { get; set; }
+        public List<ChatMessageViewModel> ChatMessageViewModels { get; set; } = new List<ChatMessageViewModel>();
     }
 }

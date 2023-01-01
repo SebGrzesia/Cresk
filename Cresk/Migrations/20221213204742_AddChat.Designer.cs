@@ -4,6 +4,7 @@ using Cresk.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cresk.Migrations
 {
     [DbContext(typeof(CreskContext))]
-    partial class CreskContextModelSnapshot : ModelSnapshot
+    [Migration("20221213204742_AddChat")]
+    partial class AddChat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,18 +24,11 @@ namespace Cresk.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-<<<<<<< HEAD
-            modelBuilder.Entity("Cresk.Models.Company", b =>
-=======
             modelBuilder.Entity("Cresk.Models.Chat", b =>
->>>>>>> feature/1-chat-messages
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-<<<<<<< HEAD
-                    b.Property<string>("CompanyName")
-=======
                     b.Property<string>("DbTicketId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -66,21 +61,16 @@ namespace Cresk.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Username")
->>>>>>> feature/1-chat-messages
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-<<<<<<< HEAD
-                    b.ToTable("Companies");
-=======
                     b.HasIndex("ChatId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("ChatMessages");
->>>>>>> feature/1-chat-messages
                 });
 
             modelBuilder.Entity("Cresk.Models.DbTicket", b =>
