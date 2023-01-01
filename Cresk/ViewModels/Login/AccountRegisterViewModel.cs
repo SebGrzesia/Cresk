@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cresk.ViewModels.Login
 {
@@ -13,6 +14,9 @@ namespace Cresk.ViewModels.Login
         [Required]
         [DataType(DataType.Password)]
         public string Password2 { get; set; }
+
+        public List<SelectListItem> CompanyList { get; set; }
+        public string CompanyId { get; set; }
 
     }
 }
