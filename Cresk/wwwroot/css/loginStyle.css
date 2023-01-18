@@ -68,7 +68,7 @@ img {
     transform: translateY(-50%);
     font-size: 16px;
     pointer-events: none;
-    transition: .5s;
+/*    transition: .1s;*/
 }
 
 .login_layout .center form .text_Field span::before{
@@ -79,12 +79,12 @@ img {
     width:0%;
     height:2px;
     background:#4fa4bf;
-    transition: .5s;
+/*    transition: .1s;*/
 }
 
 .login_layout .center form .text_Field input:focus ~ label,
 .login_layout .center form .text_Field input:valid ~ label {
-    top: -5px;
+    top: -5000px;
     color: #4fa4bf;
 }
 
