@@ -30,6 +30,7 @@
                     <div class="form-group">
                         <label asp-for="Description" class="control-label"></label>
                         <input asp-for="Description" class="form-control" />
+    @*                    @Html.TextAreaFor(m => m.Description)*@
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -89,13 +90,12 @@
                 @foreach(var message in Model.ChatMessageViewModels)
                 {
                     <div class="messages">
-                        <p>@message.Username:</p>
-                        <p>@message.Message</p>
-                        <p>@message.CreateTime</p>
+                        <p style="font-weight:700;">@message.Username</p>
+                        <p style="word-break: break-all;">@message.Message</p>
+                        <p style="font-size:11px;">@Html.Raw(message.CreateTime.ToString("MMMM dd, yyyy H:mm"))</p>
                     </div>
                 }
             </div>
-
         </div>
 
         <form asp-action="AddMessage">

@@ -36,10 +36,6 @@ a{
     align-content:center;
 }
 
-.chatView .topChatSite .h2{
-
-}
-
 
 .chatView .chatMessage {
     padding: 10px;
@@ -53,6 +49,11 @@ a{
     padding:15px;
     border: 1px solid;
     border-radius:30px;
+
+}
+
+.chatView .chatMessage .messages:hover {
+    background-color: rgba(38, 50, 56, 0.5);
 }
 
 .chatView .chatMessage .messages .p{

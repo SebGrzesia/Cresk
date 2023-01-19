@@ -151,6 +151,7 @@ namespace Cresk.Controllers
             var chat = await _context.Chats.FirstOrDefaultAsync(m => m.DbTicketId == dbTicket.Id);
             var chatMessages = await _context.ChatMessages
                 .Where(t => t.ChatId == chat.Id)
+                .OrderByDescending(t => t.CreateTime)
                 .Select(t => new ChatMessageViewModel()
                 {
                     CreateTime = t.CreateTime,
