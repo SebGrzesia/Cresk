@@ -11,10 +11,6 @@ a{
     text-decoration:none;
 }
 
-img {
-    height:65px;
-}
-
 body {
     background-image: url('../img/spikes.png');
 }
