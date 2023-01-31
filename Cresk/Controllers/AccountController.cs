@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Cresk.ViewModels.Login;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.RegularExpressions;
 
 namespace Cresk.Controllers
 {
@@ -31,6 +32,7 @@ namespace Cresk.Controllers
             return View(vm);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel vm)
         {
             var result = await _signInManager.PasswordSignInAsync(vm.UserName, vm.Password, false, false);
@@ -40,6 +42,7 @@ namespace Cresk.Controllers
             }
             else
             {
+                ViewData["LoginFlag"] = "Invalid usermane or Password";
                 return View(vm);
             }
         }

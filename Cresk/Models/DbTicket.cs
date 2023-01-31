@@ -30,8 +30,10 @@ namespace Cresk.Models
         [Display(Name = "Data modyfikacji")]
         public DateTime ModifyData { get; set; }
 
+        //public bool ShowResolvedTickets { get; set; }
         public DbTicket()
         {
+            //this.ShowResolvedTickets = false;
             this.Id = Guid.NewGuid().ToString();
         }
     }

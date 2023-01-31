@@ -24,6 +24,11 @@
             </div>
             <div class="center">
                 <h1>Login</h1>
+                <div class="alert-danger">
+                    @if(ViewData["LoginFlag"]!=null){
+                        @ViewData["LoginFlag"]
+                    }
+                </div>
                 <form method="post" asp-action="Login">
                     <div class="text_Field">
                         <input asp-for="UserName" type="text" required />

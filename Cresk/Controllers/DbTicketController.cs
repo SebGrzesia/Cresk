@@ -62,17 +62,19 @@ namespace Cresk.Controllers
             }).ToListAsync();
 
 
-            var ticketListViewModel = ticketsFromDatabase.Select(ticketFromDatabase => new IndexDbTicketViewModel()
+            //var ticketListViewModel = ticketsFromDatabase.Select(ticketFromDatabase => new IndexDbTicketViewModel()
+            var ticketListViewModel = ticketsFromDatabase.Where(x => x.Status != TicketStatus.Resolved)
+            .Select(ticketsFromDatabase => new IndexDbTicketViewModel()
             {
-                CategoryName = ticketFromDatabase.Category!=null?ticketFromDatabase.Category.Name:"----", 
-                Description = ticketFromDatabase.Description,
-                ModifyDate = ticketFromDatabase.ModifyData, 
-                EmailAddress = ticketFromDatabase.Email,
-                TicketPriority = ticketFromDatabase.Priority,
-                TicketStatus = ticketFromDatabase.Status,
-                Id = ticketFromDatabase.Id,
-                Title = ticketFromDatabase.Title,
-                TicketDisplayNumber = ticketFromDatabase.TicketDisplayNumber
+                CategoryName = ticketsFromDatabase.Category!=null?ticketsFromDatabase.Category.Name:"----", 
+                Description = ticketsFromDatabase.Description,
+                ModifyDate = ticketsFromDatabase.ModifyData, 
+                EmailAddress = ticketsFromDatabase.Email,
+                TicketPriority = ticketsFromDatabase.Priority,
+                TicketStatus = ticketsFromDatabase.Status,
+                Id = ticketsFromDatabase.Id,
+                Title = ticketsFromDatabase.Title,
+                TicketDisplayNumber = ticketsFromDatabase.TicketDisplayNumber
             });
 
             var indexViewModel = new TicketIndexViewModel();
