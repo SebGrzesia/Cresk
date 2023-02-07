@@ -17,7 +17,7 @@ namespace Cresk.Controllers
 
         public AccountController(CreskContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
-            _context = context;
+            _context = context; 
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -73,6 +73,24 @@ namespace Cresk.Controllers
             }
             else
             {
+
+                var hasNumber = new Regex(@"[0-9]+");
+                var hasUpperChar = new Regex(@"[A-Z]+");
+                var hasMinimum8Chars = new Regex(@".{8,}");
+                var emailValidation = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+
+                if (vm.Password != vm.Password2)
+                {
+                    ViewData["RegisterPasswordFlag"] = "Passwords are not the same";
+                }
+                else if (!hasNumber.IsMatch(vm.Password) || !hasUpperChar.IsMatch(vm.Password) || !hasMinimum8Chars.IsMatch(vm.Password))
+                {
+                    ViewData["RegisterPasswordFlag"] = "Password is not valid";
+                }
+                else if (!emailValidation.IsMatch(vm.Email))
+                {
+                    ViewData["RegisterPasswordFlag"] = "E-mail is no valid";
+                }
                 var companies = await _context.Companies.ToListAsync();
                 vm.CompanyList = companies.Select(company => new SelectListItem()
                 {

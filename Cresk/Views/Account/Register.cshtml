@@ -24,6 +24,12 @@
             </div>
             <div class="center">
                 <h1>Register</h1>
+                <div class="alert-danger">
+                @if (ViewData["RegisterPasswordFlag"] != null)
+                    {
+                    @ViewData["RegisterPasswordFlag"]
+                    }
+                </div>
                 <form method="post" asp-action="Register">
                     <div class="text_Field">
                         <input asp-for="Email" type="text" required />
