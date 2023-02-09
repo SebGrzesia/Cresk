@@ -11,10 +11,6 @@ a{
     text-decoration:none;
 }
 
-img {
-    height:65px;
-}
-
 body {
     background-image: url('../img/spikes.png');
 }
@@ -33,6 +29,10 @@ body {
     border-radius: 20px 20px 0 0;
     display:flex;
     align-items:center;
+}
+
+.btn{
+    margin-top:5px;
 }
 
 .main-container .top_navbar .hamburger {

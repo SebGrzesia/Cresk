@@ -24,6 +24,6 @@ namespace Cresk.ViewModels.Tickets
         public TicketPriority TicketPriority { get; set; }
         [Display(Name = "Last change")]
         public DateTime ModifyDate { get; set; }
+        //public bool ShowResolvedTickets{ get; set; }
     }
-
 }

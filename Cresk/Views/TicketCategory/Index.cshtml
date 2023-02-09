@@ -7,14 +7,17 @@
 <h1>Category list</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <a asp-action="Create" class="btn btn-outline-success">
+        <i class="fa-add fa-solid"></i>
+        Create New
+    </a>
 </p>
 
 <form asp-controller="TicketCategory" asp-action="Index" method="get">
     <p>
         Search by name: <input type="text" name="SearchString" class="form-control" />
-        <input type="submit" class="btn btn-success" value="Wyszukaj" />
-        <a asp-action="Index" class="btn btn-info">Back to Full List</a>
+        <input type="submit" class="btn btn-secondary" value="Search" />
+        <a asp-action="Index" class="btn btn-secondary">Back to Full List</a>
     </p>
 </form>
 
@@ -27,6 +30,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
